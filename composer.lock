@@ -4,54 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d1ee6387de36c263e319aa93135dc4d6",
+    "content-hash": "c3e04b45258e56f439e1c6aaee697758",
     "packages": [
-        {
-            "name": "amazonpaymentservices/aps-php-sdk",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/payfort/payfort-php-sdk.git",
-                "reference": "ac7df3c7259bca09f8bcf406a261d1b3b5aeb57c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/payfort/payfort-php-sdk/zipball/ac7df3c7259bca09f8bcf406a261d1b3b5aeb57c",
-                "reference": "ac7df3c7259bca09f8bcf406a261d1b3b5aeb57c",
-                "shasum": ""
-            },
-            "require": {
-                "ext-curl": "*",
-                "ext-openssl": "*",
-                "guzzlehttp/guzzle": "^7.5.0",
-                "php": "^8.1",
-                "psr/log": "^3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^10.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "AmazonPaymentServicesSdk\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Amazon"
-                }
-            ],
-            "description": "Amazon Payment Services PHP SDK",
-            "support": {
-                "issues": "https://github.com/payfort/payfort-php-sdk/issues",
-                "source": "https://github.com/payfort/payfort-php-sdk/tree/2.0.0"
-            },
-            "time": "2023-06-08T12:45:30+00:00"
-        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -1090,114 +1044,6 @@
                 }
             ],
             "time": "2023-12-03T19:50:20+00:00"
-        },
-        {
-            "name": "infyomlabs/laravel-generator-helpers",
-            "version": "v5.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/InfyOmLabs/laravel-generator-helpers.git",
-                "reference": "e5e81d9276de0638425bd0e3fe52a056a452a6f0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-generator-helpers/zipball/e5e81d9276de0638425bd0e3fe52a056a452a6f0",
-                "reference": "e5e81d9276de0638425bd0e3fe52a056a452a6f0",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^10.0",
-                "php": "^8.1.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "InfyOm\\GeneratorHelpers\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mitul Golakiya",
-                    "email": "me@mitul.me"
-                }
-            ],
-            "description": "Helper functions for laravel generator packages",
-            "support": {
-                "issues": "https://github.com/InfyOmLabs/laravel-generator-helpers/issues",
-                "source": "https://github.com/InfyOmLabs/laravel-generator-helpers/tree/v5.0.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/infyomlabs",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2023-03-18T04:21:27+00:00"
-        },
-        {
-            "name": "infyomlabs/laravel-ui-adminlte",
-            "version": "v5.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/InfyOmLabs/laravel-ui-adminlte.git",
-                "reference": "b762d62f429db0b71731bb916dcc8c5771d96dec"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/InfyOmLabs/laravel-ui-adminlte/zipball/b762d62f429db0b71731bb916dcc8c5771d96dec",
-                "reference": "b762d62f429db0b71731bb916dcc8c5771d96dec",
-                "shasum": ""
-            },
-            "require": {
-                "illuminate/support": "^10.0",
-                "infyomlabs/laravel-generator-helpers": "^5.0",
-                "laravel/ui": "^4.2",
-                "php": "^8.1"
-            },
-            "type": "library",
-            "extra": {
-                "laravel": {
-                    "providers": [
-                        "InfyOm\\AdminLTEPreset\\AdminLTEPresetServiceProvider"
-                    ]
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "InfyOm\\AdminLTEPreset\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Mitul Golakiya",
-                    "email": "me@mitul.me"
-                }
-            ],
-            "description": "Laravel frontend preset for AdminLTE Theme",
-            "keywords": [
-                "AdminLTE",
-                "laravel",
-                "preset"
-            ],
-            "support": {
-                "issues": "https://github.com/InfyOmLabs/laravel-ui-adminlte/issues",
-                "source": "https://github.com/InfyOmLabs/laravel-ui-adminlte/tree/v5.2.0"
-            },
-            "funding": [
-                {
-                    "url": "https://opencollective.com/infyomlabs",
-                    "type": "opencollective"
-                }
-            ],
-            "time": "2023-04-04T10:48:32+00:00"
         },
         {
             "name": "laravel/framework",
@@ -6316,6 +6162,50 @@
             "time": "2024-01-03T14:07:34+00:00"
         },
         {
+            "name": "laraveldaily/larastarters",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelDaily/Larastarters.git",
+                "reference": "1ba50db6e727bfe171f87ab0164258401e2a370a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelDaily/Larastarters/zipball/1ba50db6e727bfe171f87ab0164258401e2a370a",
+                "reference": "1ba50db6e727bfe171f87ab0164258401e2a370a",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelDaily\\Larastarters\\LarastartersServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelDaily\\Larastarters\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Povilas Korop",
+                    "email": "povilas@laraveldaily.com"
+                }
+            ],
+            "description": "Laravel Starter Kits with extra functions",
+            "support": {
+                "issues": "https://github.com/LaravelDaily/Larastarters/issues",
+                "source": "https://github.com/LaravelDaily/Larastarters/tree/2.3.2"
+            },
+            "time": "2023-11-29T07:36:57+00:00"
+        },
+        {
             "name": "mockery/mockery",
             "version": "1.6.7",
             "source": {
@@ -6987,16 +6877,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.6",
+            "version": "10.5.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "ab9a20b623b235165d24faa9d1da925cb54939c0"
+                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/ab9a20b623b235165d24faa9d1da925cb54939c0",
-                "reference": "ab9a20b623b235165d24faa9d1da925cb54939c0",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/e5c5b397a95cb0db013270a985726fcae93e61b8",
+                "reference": "e5c5b397a95cb0db013270a985726fcae93e61b8",
                 "shasum": ""
             },
             "require": {
@@ -7068,7 +6958,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.6"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.7"
             },
             "funding": [
                 {
@@ -7084,7 +6974,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-01-13T12:49:56+00:00"
+            "time": "2024-01-14T16:40:30+00:00"
         },
         {
             "name": "sebastian/cli-parser",

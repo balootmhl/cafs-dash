@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Dashboard') }}</h1>
+                    <h1 class="m-0">{{ __('About us') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -20,8 +20,10 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
+                            <h5 class="card-title">{{ __('About us') }}</h5>
+
                             <p class="card-text">
-                                {{ __('You are logged in!') }}
+                                {{ __('Sample static text page ') }}
                             </p>
                         </div>
                     </div>
