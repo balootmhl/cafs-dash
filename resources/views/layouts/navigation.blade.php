@@ -22,7 +22,7 @@
 
             <li class="nav-item">
                 <a href="{{ route('payment-links.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-users"></i>
+                    <i class="nav-icon fas fa-money-bill"></i>
                     <p>
                         {{ __('Payment Links') }}
                     </p>
