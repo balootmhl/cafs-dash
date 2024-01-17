@@ -63,6 +63,7 @@
         </a>
 
         @include('layouts.navigation')
+        @include('sweetalert::alert')
     </aside>
 
     <!-- Content Wrapper. Contains page content -->

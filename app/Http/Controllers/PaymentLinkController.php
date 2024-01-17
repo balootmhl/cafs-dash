@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\PaymentLink;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PaymentLinkController extends Controller
 {
     public function index()
     {
         $links = PaymentLink::orderBy('created_at', 'DESC')->get();
+
+        $title = 'Delete Payment Link!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
 
         return view('payment-links.index', compact('links'));
     }
@@ -28,7 +33,9 @@ class PaymentLinkController extends Controller
         $payment_link->link = "https://sbcheckout.payfort.com/5cc935253d0b217b";
         $payment_link->save();
 
-        return redirect()->route('payment-links.index')->with('success', 'Payment Link created.');
+        Alert::success('Success', 'Payment Link created.');
+
+        return redirect()->route('payment-links.index');
     }
 
     public function edit($id)
@@ -50,7 +57,9 @@ class PaymentLinkController extends Controller
         $payment_link->link = "https://sbcheckout.payfort.com/5cc935253d0b217b";
         $payment_link->save();
 
-        return redirect()->route('payment-links.index')->with('success', 'Payment Link updated.');
+        Alert::success('Success', 'Payment Link updated.');
+
+        return redirect()->route('payment-links.index');
     }
 
     public function destroy($id)
@@ -58,7 +67,9 @@ class PaymentLinkController extends Controller
         $payment_link = PaymentLink::findOrFail($id);
         $payment_link->delete();
 
-        return redirect()->route('payment-links.index')->with('success', 'Payment Link deleted.');
+        Alert::success('Success', 'Payment Link deleted.');
+
+        return redirect()->route('payment-links.index');
 
     }
 }
