@@ -96,12 +96,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm" title="Edit">
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                             <a href="{{ route('categories.destroy', $category->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
                                                 <i class="fas fa-trash"></i>
-                                            </a> --}}
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

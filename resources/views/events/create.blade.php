@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Edit Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">Create Event</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,19 +41,21 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('events.store', $event->id) }}" method="POST">
+                            <form action="{{ route('events.store') }}" method="POST">
                                 @csrf
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="name">Event Name</label>
+                                            <input type="text" name="name" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="customer_name">Event Name</label>
-                                            <input type="text" name="customer_name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="category">Currency *</label>
-                                            <select name="category" id="category" class="form-control" onchange="updateSubcategories()" required>
+                                            <label for="main_category">Main Category</label>
+                                            <select name="main_category" id="main_category" class="form-control" onchange="updateSubcategories()" required>
                                                 <option value="" selected disabled>Select a category</option>
                                                 @foreach ($categories as $category)
                                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -63,32 +65,29 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="subcategory">Currency *</label>
-                                            <select name="subcategory" id="subcategory" class="form-control"  required>
+                                            <label for="sub_category">Sub Category</label>
+                                            <select name="sub_category" id="sub_category" class="form-control" disabled>
                                                 <option value="" selected disabled>Select a category</option>
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="datetime">Date</label>
+                                            <input type="datetime-local" name="datetime" id="datetime" class="form-control" required>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="date">Date</label>
-                                            <input type="date" name="date" class="form-control"  required>
+                                            <label for="description">Description</label>
+                                            <textarea name="description" id="description" rows="10" class="form-control"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" value="{{ $event->amount }}" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Update Payment Link" class="btn btn-primary btn-block">
-                                        </div>
-                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Create Event" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>
@@ -105,38 +104,33 @@
 @section('scripts')
     <script>
         function updateSubcategories() {
-            var categoryId = document.getElementById("category").value;
-            var subcategoryDropdown = document.getElementById("subcategory");
+            var mainCategoryId = document.getElementById("main_category").value;
+            var subcategoryDropdown = document.getElementById("sub_category");
+
+            // Disable the subcategory dropdown
+            subcategoryDropdown.disabled = true;
 
             // Remove existing options
             subcategoryDropdown.innerHTML = "<option value='' selected disabled>Select a subcategory</option>";
 
-            // Fetch subcategories based on the selected category
-            var subcategories = getSubcategories(categoryId);
+            // Fetch subcategories based on the selected main category
+            fetch('/get-subcategories/' + mainCategoryId)
+                .then(response => response.json())
+                .then(subcategories => {
+                    // Populate subcategory dropdown
+                    subcategories.forEach(subcategory => {
+                        var option = document.createElement("option");
+                        option.value = subcategory.id;
+                        option.text = subcategory.name;
+                        subcategoryDropdown.add(option);
+                    });
 
-            // Populate subcategory dropdown
-            subcategories.forEach(function(subcategory) {
-                var option = document.createElement("option");
-                option.value = subcategory.id;
-                option.text = subcategory.name;
-                subcategoryDropdown.add(option);
-            });
-
-            // Enable the subcategory dropdown
-            subcategoryDropdown.disabled = false;
-        }
-
-        // Mock function to fetch subcategories from the server
-        function getSubcategories(categoryId) {
-            // This is where you would make an AJAX request to your server to fetch subcategories based on the category
-            // For now, let's assume you have a hardcoded list for demonstration purposes.
-            var subcategories = [
-                { id: 1, name: "Subcategory 1-1" },
-                { id: 2, name: "Subcategory 1-2" },
-                // Add more subcategories as needed
-            ];
-
-            return subcategories;
+                    // Enable the subcategory dropdown
+                    subcategoryDropdown.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error fetching subcategories:', error);
+                });
         }
     </script>
 @endsection

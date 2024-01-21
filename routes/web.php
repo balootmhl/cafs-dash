@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaymentLinkController;
-use App\Http\Controllers\EventLinkController;
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,4 +35,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('payment-links', PaymentLinkController::class);
     Route::resource('events', EventController::class);
     Route::resource('categories', CategoryController::class);
+    Route::get('get-subcategories/{mainCategoryId}', [CategoryController::class, 'getSubcategories']);
 });

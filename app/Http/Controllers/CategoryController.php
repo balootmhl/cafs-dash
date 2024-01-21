@@ -13,7 +13,19 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
 
+        $title = 'Delete Event Category!';
+        $text = "Are you sure you want to delete?";
+        confirmDelete($title, $text);
+
         return view('categories.index', compact('categories'));
+    }
+
+    public function getSubcategories($mainCategoryId)
+    {
+        // Fetch subcategories based on the selected main category
+        $subcategories = Category::where('parent_id', $mainCategoryId)->get();
+
+        return response()->json($subcategories);
     }
 
     public function store(Request $request)
@@ -24,6 +36,8 @@ class CategoryController extends Controller
             $category->parent_id = $request->parent_id;
         }
         $category->save();
+
+        Alert::success('Success', 'Category created.');
 
         return redirect()->route('categories.index');
     }
@@ -43,12 +57,12 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        $payment_link = Category::findOrFail($id);
-        $payment_link->delete();
+        $category = Category::findOrFail($id);
+        $category->delete();
 
         Alert::success('Success', 'Category deleted.');
 
-        return redirect()->route('payment-links.index');
+        return redirect()->route('categories.index');
     }
 
 
