@@ -21,7 +21,7 @@
             </li>
 
             <li class="nav-item">
-                <a href="{{ route('events.index') }}" class="nav-link">
+                <a href="" class="nav-link">
                     <i class="nav-icon fas fa-money-bill"></i>
                     <p>
                         {{ __('Events') }}
