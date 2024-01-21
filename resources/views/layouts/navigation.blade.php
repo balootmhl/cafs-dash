@@ -21,6 +21,24 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('events.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-money-bill"></i>
+                    <p>
+                        {{ __('Events') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('categories.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-money-bill"></i>
+                    <p>
+                        {{ __('Categories') }}
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('payment-links.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-money-bill"></i>
                     <p>

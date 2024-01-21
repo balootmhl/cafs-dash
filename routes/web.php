@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\PaymentLinkController;
+use App\Http\Controllers\EventLinkController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,4 +33,6 @@ Route::middleware('auth')->group(function () {
     Route::put('profile', [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
 
     Route::resource('payment-links', PaymentLinkController::class);
+    Route::resource('events', EventController::class);
+    Route::resource('categories', CategoryController::class);
 });

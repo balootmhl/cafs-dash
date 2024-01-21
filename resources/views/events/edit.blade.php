@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Create Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">Edit Payment Link (Invoicing)</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,25 +41,26 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('payment-links.store') }}" method="POST">
+                            <form action="{{ route('payment-links.update', $link->id) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="customer_name">Customer Name</label>
-                                            <input type="text" name="customer_name" class="form-control">
+                                            <input type="text" name="customer_name" value="{{ $link->customer_name }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="customer_email">Customer Email *</label>
-                                            <input type="email" name="customer_email" class="form-control" required>
+                                            <input type="email" name="customer_email" value="{{ $link->customer_email }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="request_expiry_date">Expiry Date *</label>
-                                            <input type="date" name="request_expiry_date" class="form-control" required>
+                                            <input type="date" name="request_expiry_date" class="form-control" value="{{ $link->request_expiry_date }}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -67,7 +68,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" class="form-control" required>
+                                            <input type="number" name="amount" value="{{ $link->amount }}" class="form-control" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
@@ -81,7 +82,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Create Payment Link" class="btn btn-primary btn-block">
+                                            <input type="submit" value="Update Payment Link" class="btn btn-primary btn-block">
                                         </div>
                                     </div>
                                 </div>
@@ -89,47 +90,6 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body p-0">
-
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Email</th>
-                                        <th>Reference</th>
-                                        <th>Amount</th>
-                                        {{-- <th>Expire Date</th> --}}
-                                        <th>Link</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($links as $link)
-                                    <tr>
-                                        <td>{{ $link->customer_email }}</td>
-                                        <td>{{ $link->merchant_reference }}</td>
-                                        <td>{{ $link->amount }} {{ $link->currency }}</td>
-                                        {{-- <td>{{ $link->request_expiry_date }}</td> --}}
-                                        <td>{{ $link->link }}</td>
-                                        <td>
-                                            <a href="{{ route('payment-links.edit', $link->id) }}" class="btn btn-primary btn-sm" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('payment-links.destroy', $link->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
-
-                        <div class="card-footer clearfix">
-                            {{-- {{ $links->links() }} --}}
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- /.row -->
@@ -138,4 +98,32 @@
     <!-- /.content -->
 @endsection
 
+@section('styles')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+@endsection
 
+@section('scripts')
+    @if ($message = Session::get('success'))
+        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            toastr.success('{{ $message }}')
+        </script>
+    @endif
+    @if(session('toast'))
+        <script>
+            toastr.{{ session('toast')['type'] }}('{{ session('toast')['message'] }}');
+        </script>
+    @endif
+@endsection

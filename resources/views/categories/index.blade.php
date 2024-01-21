@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Payment Links') }}</h1>
+                    <h1 class="m-0">{{ __('Categories') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Create Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">Create Event Category</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,47 +41,29 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('payment-links.store') }}" method="POST">
+                            <form action="{{ route('categories.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="customer_name">Customer Name</label>
-                                            <input type="text" name="customer_name" class="form-control">
+                                            <label for="name">Category Name</label>
+                                            <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="customer_email">Customer Email *</label>
-                                            <input type="email" name="customer_email" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="request_expiry_date">Expiry Date *</label>
-                                            <input type="date" name="request_expiry_date" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="currency">Currency *</label>
-                                            <select name="currency" id="currency" class="form-control" required>
-                                                <option value="SAR" selected>SAR</option>
+                                            <label for="parent_id">Parent Category</label>
+                                            <select name="parent_id" id="parent_id" class="form-control">
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Create Payment Link" class="btn btn-primary btn-block">
+                                            <input type="submit" value="Create Event Category" class="btn btn-primary btn-block">
                                         </div>
                                     </div>
                                 </div>
@@ -95,27 +77,29 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Email</th>
-                                        <th>Reference</th>
-                                        <th>Amount</th>
-                                        {{-- <th>Expire Date</th> --}}
-                                        <th>Link</th>
+                                        <th>#Sr</th>
+                                        <th>Name</th>
+                                        <th>Parent</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($links as $link)
+                                @foreach($categories as $category)
                                     <tr>
-                                        <td>{{ $link->customer_email }}</td>
-                                        <td>{{ $link->merchant_reference }}</td>
-                                        <td>{{ $link->amount }} {{ $link->currency }}</td>
-                                        {{-- <td>{{ $link->request_expiry_date }}</td> --}}
-                                        <td>{{ $link->link }}</td>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>{{ $category->name }}</td>
                                         <td>
-                                            <a href="{{ route('payment-links.edit', $link->id) }}" class="btn btn-primary btn-sm" title="Edit">
+                                            @if (!is_null($category->parent))
+                                                {{ $category->parent->name }}
+                                            @else
+                                                None
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('categories.edit', $category->id) }}" class="btn btn-primary btn-sm" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('payment-links.destroy', $link->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
+                                            <a href="{{ route('categories.destroy', $category->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
@@ -127,7 +111,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer clearfix">
-                            {{-- {{ $links->links() }} --}}
+                            {{-- {{ $categories->links() }} --}}
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Payment Links') }}</h1>
+                    <h1 class="m-0">{{ __('Events') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Create Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">Create Event</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,12 +41,12 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('payment-links.store') }}" method="POST">
+                            <form action="{{ route('events.store') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="customer_name">Customer Name</label>
+                                            <label for="customer_name">Name</label>
                                             <input type="text" name="customer_name" class="form-control">
                                         </div>
                                     </div>
@@ -81,7 +81,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Create Payment Link" class="btn btn-primary btn-block">
+                                            <input type="submit" value="Create Event" class="btn btn-primary btn-block">
                                         </div>
                                     </div>
                                 </div>
@@ -112,10 +112,10 @@
                                         {{-- <td>{{ $link->request_expiry_date }}</td> --}}
                                         <td>{{ $link->link }}</td>
                                         <td>
-                                            <a href="{{ route('payment-links.edit', $link->id) }}" class="btn btn-primary btn-sm" title="Edit">
+                                            <a href="{{ route('events.edit', $link->id) }}" class="btn btn-primary btn-sm" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <a href="{{ route('payment-links.destroy', $link->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
+                                            <a href="{{ route('events.destroy', $link->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
                                                 <i class="fas fa-trash"></i>
                                             </a>
                                         </td>
