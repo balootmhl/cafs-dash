@@ -36,6 +36,9 @@ return [
     |
     */
 
+    'alert' => 'sweetalert::alert',
+
+
     'alwaysLoadJS' => env('SWEET_ALERT_ALWAYS_LOAD_JS', false),
 
     /*

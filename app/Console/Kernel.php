@@ -9,6 +9,7 @@ class Kernel extends ConsoleKernel
 {
     protected $commands = [
         Commands\GenerateCategories::class,
+        Commands\DummySignature::class,
     ];
 
     /**
