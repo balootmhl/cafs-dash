@@ -27,14 +27,17 @@ class DummySignature extends Command
     {
         $sha_string = '';
         $req_array = [
-            'command'            => 'PAYMENT_LINK',
+            'service_command' => 'PAYMENT_LINK',
             'access_code'        => 'Hd2JRXbMCWp1yrjLPfSw',
             'merchant_identifier' => 'a47fe142',
             'merchant_reference' => 'Test-962356101',
-            'amount'             => '1000',
+            'amount'             => '10000',
             'currency'           => 'SAR',
             'language'           => 'en',
             'customer_email'     => 'baloot.mhl@gmail.com',
+            'request_expiry_date' => '2024-02-10T08:15:09+00:00',
+            'payment_link_id' => '169996200013942416',
+            'notification_type' => 'EMAIL'
         ];
         ksort($req_array);
         foreach ($req_array as $key => $value) {

@@ -31,4 +31,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'amazon' => [
+        'url' => env('AMAZON_PAYMENT_API'),
+        'id' => env('AMAZON_PAYMENT_MERCHANT_IDENTIFIER'),
+        'accesscode' => env('AMAZON_PAYMENT_ACCESS_CODE'),
+        'sharequest' => env('AMAZON_PAYMENT_SHA_REQUEST_PHRASE'),
+    ],
+
 ];
