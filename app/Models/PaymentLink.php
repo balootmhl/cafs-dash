@@ -10,6 +10,10 @@ class PaymentLink extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'data' => 'object'
+    ];
+
     function generateMerchantReferenceNumber($length = 15)
     {
         // Ensure an odd length for better placement of the hyphen/dash/dot
@@ -27,5 +31,10 @@ class PaymentLink extends Model
         $referenceNumber = $firstHalf . '-' . $secondHalf;
 
         return $referenceNumber;
+    }
+
+    public function event()
+    {
+        return $this->belongsTo(Event::class);
     }
 }

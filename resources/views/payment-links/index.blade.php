@@ -19,78 +19,14 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    {{-- <div class="alert alert-info">
-                        Sample table page
-                    </div> --}}
-                    <div class="card card-outline card-primary">
-                        {{-- <div class="overlay dark">
-                            <i class="fas fa-2x fa-sync-alt fa-spin"></i>
-                        </div> --}}
-                        <div class="card-header">
-                            <h3 class="card-title">Create Payment Link (Invoicing)</h3>
-
-                            <div class="card-tools">
-                            <!-- This will cause the card to maximize when clicked -->
-                                <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                                <!-- This will cause the card to collapse when clicked -->
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                                <!-- This will cause the card to be removed when clicked -->
-                                {{-- <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button> --}}
-                            </div>
-                            <!-- /.card-tools -->
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <form action="{{ route('payment-links.store') }}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="customer_name">Customer Name</label>
-                                            <input type="text" name="customer_name" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="customer_email">Customer Email *</label>
-                                            <input type="email" name="customer_email" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="request_expiry_date">Expiry Date *</label>
-                                            <input type="date" name="request_expiry_date" class="form-control" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="currency">Currency *</label>
-                                            <select name="currency" id="currency" class="form-control" required>
-                                                <option value="SAR" selected>SAR</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Create Payment Link" class="btn btn-primary btn-block">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
                     <div class="card">
                         <div class="card-body p-0">
+                            <div class="card-header">
+                                {{-- <div class="card-tools"> --}}
+                                    <a href="{{ route('payment-links.create') }}" class="btn btn-primary btn-sm">Create Payment Link</a>
+                                {{-- </div> --}}
+                                <!-- /.card-tools -->
+                            </div>
 
                             <table class="table">
                                 <thead>
@@ -112,12 +48,19 @@
                                         {{-- <td>{{ $link->request_expiry_date }}</td> --}}
                                         <td>{{ $link->link }}</td>
                                         <td>
-                                            <a href="{{ route('payment-links.edit', $link->id) }}" class="btn btn-primary btn-sm" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('payment-links.destroy', $link->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <div class="btn-group">
+                                                <a href="{{ route('payment-links.show', $link->id) }}" class="btn btn-primary btn-sm" title="View">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <form action="{{ route('payment-links.destroy', $link->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @endforeach

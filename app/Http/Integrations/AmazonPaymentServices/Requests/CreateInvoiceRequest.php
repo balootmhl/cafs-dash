@@ -8,6 +8,7 @@ use Saloon\Enums\Method;
 use Saloon\Http\Request;
 use Saloon\Contracts\Body\HasBody;
 use Saloon\Traits\Body\HasJsonBody;
+use Carbon\Carbon;
 
 class CreateInvoiceRequest extends Request implements HasBody
 {
@@ -36,6 +37,7 @@ class CreateInvoiceRequest extends Request implements HasBody
         $payment_link = PaymentLink::findOrFail($this->payment_link_id);
         $event = Event::findOrFail($this->event_id);
         $sha = '';
+        $request_expiry_date = Carbon::parse($payment_link->request_expiry_date);
         $request = [
             'service_command' => 'PAYMENT_LINK',
             'access_code' => config('services.amazon.accesscode'),
@@ -43,10 +45,13 @@ class CreateInvoiceRequest extends Request implements HasBody
             'merchant_reference' => $payment_link->merchant_reference,
             'amount' => $payment_link->amount,
             'customer_email' => $payment_link->customer_email,
+            'request_expiry_date' => $request_expiry_date->toIso8601ZuluString(),
             'language' => 'en',
             'currency' => 'SAR',
-            'notification_type' => 'EMAIL'
+            'notification_type' => 'EMAIL',
+            'order_description' => $event->name
         ];
+        ksort($request);
         foreach ($request as $key => $value) {
             $sha .= "$key=$value";
         }

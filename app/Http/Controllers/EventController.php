@@ -14,16 +14,12 @@ class EventController extends Controller
     {
         $events = Event::all();
 
-        $title = 'Delete Event!';
-        $text = "Are you sure you want to delete?";
-        confirmDelete($title, $text);
-
         return view('events.index', compact('events'));
     }
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::whereNull('parent_id')->get();
 
         return view('events.create', compact('categories'));
     }
@@ -37,6 +33,27 @@ class EventController extends Controller
         $event->description = $request->description;
         $event->save();
         Alert::success('Success', 'Event created.');
+        return redirect()->route('events.index');
+    }
+
+    public function edit($id)
+    {
+        $event = Event::findOrFail($id);
+        $categories = Category::whereNull('parent_id')->get();
+
+
+        return view('events.edit', compact('event', 'categories'));
+    }
+
+    public function update($id, Request $request)
+    {
+        $event = Event::findOrFail($id);
+        $event->name = $request->name;
+        $event->datetime = $request->datetime;
+        $event->category_id = $request->sub_category;
+        $event->description = $request->description;
+        $event->save();
+        Alert::success('Success', 'Event updated.');
         return redirect()->route('events.index');
     }
 

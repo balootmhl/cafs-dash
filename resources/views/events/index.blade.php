@@ -20,10 +20,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Events Table</h3>
-                            <div class="card-tools">
-                                <a href="{{ route('events.create') }}" class="btn btn-primary">Create an Event</a>
-                            </div>
+                            <a href="{{ route('events.create') }}" class="btn btn-primary btn-sm">Create an Event</a>
                             <!-- /.card-tools -->
                         </div>
                         <div class="card-body p-0">
@@ -46,12 +43,18 @@
                                         <td>{{ $event->datetime }}</td>
                                         <td></td>
                                         <td>
-                                            <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary btn-sm" title="Edit">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <a href="{{ route('events.destroy', $event->id) }}" class="btn btn-danger btn-sm" title="Delete" data-confirm-delete="true">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                            <div class="btn-group">
+                                                <a href="{{ route('events.edit', $event->id) }}" class="btn btn-primary btn-sm" title="Edit" style="margin-right:5px;">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <form action="{{ route('events.destroy', $event->id) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure you want to delete?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -71,5 +74,3 @@
     </div>
     <!-- /.content -->
 @endsection
-
-

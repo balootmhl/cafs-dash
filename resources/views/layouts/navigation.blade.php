@@ -21,12 +21,51 @@
             </li>
 
             <li class="nav-item">
+                <a href="{{ route('payment-links.index') }}" class="nav-link">
+                    <i class="nav-icon fas fa-money-bill"></i>
+                    <p>
+                        {{ __('Payment Links') }}
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="{{ route('payment-links.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('payment-links.create') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add New</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
                 <a href="{{ route('events.index') }}" class="nav-link">
                     <i class="nav-icon fas fa-calendar"></i>
                     <p>
                         {{ __('Events') }}
+                        <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                    <li class="nav-item">
+                        <a href="{{ route('events.index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('events.create') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add New</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
 
             <li class="nav-item">
@@ -34,15 +73,6 @@
                     <i class="nav-icon fas fa-tag"></i>
                     <p>
                         {{ __('Categories') }}
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="{{ route('payment-links.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-money-bill"></i>
-                    <p>
-                        {{ __('Payment Links') }}
                     </p>
                 </a>
             </li>

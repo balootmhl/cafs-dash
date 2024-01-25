@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Edit Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">View Payment Link (Invoicing)</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,52 +41,56 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('payment-links.update', $link->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="customer_name">Customer Name</label>
-                                            <input type="text" name="customer_name" value="{{ $link->customer_name }}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="customer_email">Customer Email *</label>
-                                            <input type="email" name="customer_email" value="{{ $link->customer_email }}" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="request_expiry_date">Expiry Date *</label>
-                                            <input type="date" name="request_expiry_date" class="form-control" value="{{ $link->request_expiry_date }}" required>
-                                        </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="customer_name">Customer Name</label>
+                                        <input type="text" name="customer_name" value="{{ $link->customer_name }}" class="form-control" disabled>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" value="{{ $link->amount }}" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="currency">Currency *</label>
-                                            <select name="currency" id="currency" class="form-control" required>
-                                                <option value="SAR" selected>SAR</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Update Payment Link" class="btn btn-primary btn-block">
-                                        </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="customer_email">Customer Email</label>
+                                        <input type="email" name="customer_email" value="{{ $link->customer_email }}" class="form-control" disabled>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="event">Event</label>
+                                        <input type="text" name="event" class="form-control" value="{{ $link->event->name }}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="amount">Amount</label>
+                                        <input type="number" name="amount" value="{{ $link->amount }}" class="form-control" disabled>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="currency">Currency</label>
+                                        <select name="currency" id="currency" class="form-control" disabled>
+                                            <option value="SAR" selected>SAR</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="request_expiry_date">Expiry Date</label>
+                                        <input type="datetime-local" name="request_expiry_date" class="form-control" value="{{ $link->request_expiry_date }}" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label for="link">APS Payment Link</label>
+                                        <input type="text" id="link" name="link" value="{{ $link->link }}" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

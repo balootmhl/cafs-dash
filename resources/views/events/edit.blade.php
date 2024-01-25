@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Payment Links') }}</h1>
+                    <h1 class="m-0">{{ __('Events') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -27,7 +27,7 @@
                             <i class="fas fa-2x fa-sync-alt fa-spin"></i>
                         </div> --}}
                         <div class="card-header">
-                            <h3 class="card-title">Edit Payment Link (Invoicing)</h3>
+                            <h3 class="card-title">Edit Event</h3>
 
                             <div class="card-tools">
                             <!-- This will cause the card to maximize when clicked -->
@@ -41,50 +41,57 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('payment-links.update', $link->id) }}" method="POST">
+                            <form action="{{ route('events.update', $event->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="col-sm-4">
+                                    <div class="col-sm-12">
                                         <div class="form-group">
-                                            <label for="customer_name">Customer Name</label>
-                                            <input type="text" name="customer_name" value="{{ $link->customer_name }}" class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="customer_email">Customer Email *</label>
-                                            <input type="email" name="customer_email" value="{{ $link->customer_email }}" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="request_expiry_date">Expiry Date *</label>
-                                            <input type="date" name="request_expiry_date" class="form-control" value="{{ $link->request_expiry_date }}" required>
+                                            <label for="name">Event Name</label>
+                                            <input type="text" name="name" class="form-control" value="{{ $event->name }}" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="amount">Amount *</label>
-                                            <input type="number" name="amount" value="{{ $link->amount }}" class="form-control" required>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <div class="form-group">
-                                            <label for="currency">Currency *</label>
-                                            <select name="currency" id="currency" class="form-control" required>
-                                                <option value="SAR" selected>SAR</option>
+                                            <label for="main_category">Main Category</label>
+                                            <select name="main_category" id="main_category" class="form-control" onchange="updateSubcategories()" required>
+                                                <option value="" disabled>Select main category</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}" @if($event->category->parent->id == $category->id) selected @endif>{{ $category->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                            <label for="" style="visibility: hidden !important;">Submit</label>
-                                            <input type="submit" value="Update Payment Link" class="btn btn-primary btn-block">
+                                            <label for="sub_category">Sub Category</label>
+                                            <select name="sub_category" id="sub_category" class="form-control">
+                                                <option value="" disabled>Select subcategory</option>
+                                                @foreach ($event->category->parent->children as $subcat)
+                                                    <option value="{{ $subcat->id }}" @if ($subcat->id == $event->category_id) selected @endif>{{ $subcat->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="datetime">Date</label>
+                                            <input type="datetime-local" name="datetime" id="datetime" class="form-control" value="{{ $event->datetime }}" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="description">Description</label>
+                                            <textarea name="description" id="description" rows="10" class="form-control">{{ $event->description }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Update Event" class="btn btn-primary">
                                 </div>
                             </form>
                         </div>
@@ -98,32 +105,36 @@
     <!-- /.content -->
 @endsection
 
-@section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-@endsection
-
 @section('scripts')
-    @if ($message = Session::get('success'))
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-        <script>
-            toastr.options = {
-                "closeButton": true,
-                "showDuration": "300",
-                "hideDuration": "1000",
-                "timeOut": "5000",
-                "extendedTimeOut": "1000",
-                "showEasing": "swing",
-                "hideEasing": "linear",
-                "showMethod": "fadeIn",
-                "hideMethod": "fadeOut"
-            }
+    <script>
+        function updateSubcategories() {
+            var mainCategoryId = document.getElementById("main_category").value;
+            var subcategoryDropdown = document.getElementById("sub_category");
 
-            toastr.success('{{ $message }}')
-        </script>
-    @endif
-    @if(session('toast'))
-        <script>
-            toastr.{{ session('toast')['type'] }}('{{ session('toast')['message'] }}');
-        </script>
-    @endif
+            // Disable the subcategory dropdown
+            subcategoryDropdown.disabled = true;
+
+            // Remove existing options
+            subcategoryDropdown.innerHTML = "<option value='' selected disabled>Select subcategory</option>";
+
+            // Fetch subcategories based on the selected main category
+            fetch('/get-subcategories/' + mainCategoryId)
+                .then(response => response.json())
+                .then(subcategories => {
+                    // Populate subcategory dropdown
+                    subcategories.forEach(subcategory => {
+                        var option = document.createElement("option");
+                        option.value = subcategory.id;
+                        option.text = subcategory.name;
+                        subcategoryDropdown.add(option);
+                    });
+
+                    // Enable the subcategory dropdown
+                    subcategoryDropdown.disabled = false;
+                })
+                .catch(error => {
+                    console.error('Error fetching subcategories:', error);
+                });
+        }
+    </script>
 @endsection

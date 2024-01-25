@@ -47,7 +47,7 @@
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label for="name">Event Name</label>
-                                            <input type="text" name="name" class="form-control">
+                                            <input type="text" name="name" class="form-control" required>
                                         </div>
                                     </div>
                                 </div>
