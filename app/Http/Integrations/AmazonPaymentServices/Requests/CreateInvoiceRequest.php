@@ -43,7 +43,7 @@ class CreateInvoiceRequest extends Request implements HasBody
             'access_code' => config('services.amazon.accesscode'),
             'merchant_identifier' => config('services.amazon.id'),
             'merchant_reference' => $payment_link->merchant_reference,
-            'amount' => $payment_link->amount,
+            'amount' => $payment_link->amount * 100,
             'customer_email' => $payment_link->customer_email,
             'request_expiry_date' => $request_expiry_date->toIso8601ZuluString(),
             'language' => 'en',

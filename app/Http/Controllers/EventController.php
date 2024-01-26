@@ -13,8 +13,18 @@ class EventController extends Controller
     public function index()
     {
         $events = Event::all();
+        $categories = Category::whereNull('parent_id')->get();
 
-        return view('events.index', compact('events'));
+        return view('events.index', compact('events', 'categories'));
+    }
+
+    public function search(Request $request)
+    {
+        $selected_main = Category::findOrFail($request->main_category);
+        $selected_sub = Category::findOrFail($request->sub_category);
+        $events = Event::where('category_id', $selected_sub->id)->get();
+        $categories = Category::whereNull('parent_id')->get();
+        return view('events.search-result', compact('events', 'categories', 'selected_sub', 'selected_main'));
     }
 
     public function create()

@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('payment-links', PaymentLinkController::class);
     Route::resource('events', EventController::class);
+    Route::post('events/search', [EventController::class, 'search'])->name('events.search');
     Route::resource('categories', CategoryController::class);
     Route::get('get-subcategories/{mainCategoryId}', [CategoryController::class, 'getSubcategories']);
 });

@@ -6,7 +6,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Events') }}</h1>
+                    <h1 class="m-0">{{ __('Events') }} - Search Results</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -20,18 +20,24 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ route('events.create') }}" class="btn btn-primary">Create an Event</a>
+                            <div class="btn-group">
+                                <a href="{{ route('events.index') }}" class="btn btn-primary mr-1">Back</a>
+                                <a href="{{ route('events.create') }}" class="btn btn-primary">Create an Event</a>
+                            </div>
                             <div class="card-tools">
                                 <form class="form-inline" action="{{ route('events.search') }}" method="POST">
                                     @csrf
                                     <select name="main_category" id="main_category" onchange="updateSubcategories()" class="form-control mr-1">
-                                        <option value="" selected disabled>Select Category</option>
+                                        <option value="" disabled>Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option value="{{ $category->id }}" @if($category->id == $selected_main->id) selected @endif>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <select name="sub_category" id="sub_category" class="form-control mr-1">
-                                        <option value="" selected disabled>Select Sub-Category</option>
+                                        <option value="" disabled>Select Sub-Category</option>
+                                        @foreach ($selected_main->children as $child)
+                                            <option value="{{ $child->id }}" @if($child->id == $selected_sub->id) selected @endif>{{ $child->name }}</option>
+                                        @endforeach
                                     </select>
                                     <button type="submit" class="btn btn-primary">Search</button>
                                 </form>
