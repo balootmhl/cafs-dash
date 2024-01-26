@@ -42,15 +42,25 @@ class CategoryController extends Controller
         return redirect()->route('categories.index');
     }
 
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        $categories = Category::all();
+
+
+        return view('categories.edit', compact('category', 'categories'));
+    }
+
 
     public function update($id, Request $request)
     {
-        $category = new Category();
+        $category = Category::findOrFail($id);
         $category->name = $request->get('name');
         if($request->has('parent_id')){
             $category->parent_id = $request->parent_id;
         }
         $category->save();
+        Alert::success('Success', 'Category updated.');
 
         return redirect()->route('categories.index');
     }
