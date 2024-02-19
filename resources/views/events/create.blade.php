@@ -66,7 +66,7 @@
                                     <div class="col-sm-4">
                                         <div class="form-group">
                                             <label for="sub_category">Sub Category</label>
-                                            <select name="sub_category" id="sub_category" class="form-control" disabled>
+                                            <select name="sub_category" id="sub_category" class="form-control" required>
                                                 <option value="" selected disabled>Select a category</option>
                                             </select>
                                         </div>
